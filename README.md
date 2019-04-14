@@ -18,6 +18,7 @@
 |------|----|-------|
 |name|string|index: true, null: false, unique: true|
 |mail|string|null: false|
+|password|string|null: false, unique: true|
 
 ### Association
 - has_many :groups, through: members
