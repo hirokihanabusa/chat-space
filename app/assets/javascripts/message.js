@@ -1,7 +1,14 @@
-$(function(){
-  $('#new_message').on('submit', function(e){ 
+$(function() {
+  $('#new_message').on('submit', function(e) { 
     e.preventDefault();
-    console.log(this);
-    var formData = new FormData();
-  });
-});
+    var formData = new FormData(this);
+    var url = $(this).attr('action')
+    $.ajax({
+      url: url,
+      data: formData,
+      dataType: 'json',
+      processdata: false,
+      contentType: false
+    })
+  })
+})
