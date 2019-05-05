@@ -1,7 +1,7 @@
 $(function(){
-  $(".form_message").on('submit', function(e){
+  $('#new_message').on('submit', function(e){ 
     e.preventDefault();
-    console.log('abc')
-    var formData = new FormData(this);
-  })
-})
+    console.log(this);
+    var formData = new FormData();
+  });
+});
