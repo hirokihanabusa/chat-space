@@ -71,6 +71,6 @@ gem 'bootstrap-sass'
 gem 'devise'
 
 gem 'carrierwave'
-
+gem 'pry-rails'
 gem 'mini_magick'
 gem 'jquery-rails'
