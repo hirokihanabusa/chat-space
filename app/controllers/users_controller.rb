@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 
   def index
     @user = user.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def edit
