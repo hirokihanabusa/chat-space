@@ -1,6 +1,6 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
   function buildHTML(message) {
-    var image = message.image.url
+    var image = message.image
     if (image) {
       var imageHtml=`<img src='${image}' class='lower-message__image'/>`
     } else{
@@ -8,14 +8,15 @@ $(function() {
     }
 
     var html = `<div class="message" data-message-id="${message.id}">
-                 <div class="upper-message" data-message-id="${message.id}"></div>
-                 <div class="upper-message__user-name">${message.user.name}</div>
-                 <div class="upper-message__date">${message.date}</div>
-                 <div class="lower-meesage">
-                  <p class="lower-message__content">${message.content}</p>
-                  ${imageHtml}
-                 </div>
-                </div>`;
+                  <div class="upper-message" data-message-id="${message.id}">
+                    <div class="upper-message__user-name">${message.user_name}</div>
+                    <div class="upper-message__date">${message.date}</div>
+                  </div>          
+                  <div class="lower-meesage">
+                    <p class="lower-message__content">${message.content}</p>
+                    ${imageHtml}
+                  </div>
+                </div>`
   return html;
   }
 
@@ -28,13 +29,15 @@ $(function() {
       data: formData,
       type: 'POST',
       dataType: 'json',
-      processdata: false,
+      processData: false,
       contentType: false
     })
     .done(function(data){
       var html = buildHTML(data);
       $('.messages').append(html);
       $('.message.content').val('');
+      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
+      return false
     })
     .fail(function(data){
       alert('エラーが発生したためメッセージは送信できませんでした。');

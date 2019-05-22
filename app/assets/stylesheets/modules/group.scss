@@ -59,6 +59,8 @@
     .chat-group-form__field--right {
       float: right;
       width: 70%;
+      border-bottom: 1px solid #ddd;
+      line-height: 50px;
     }
 
     .chat-group-form__label {
@@ -81,7 +83,6 @@
     padding: 0 15px;
     line-height: 50px;
     font-size: 14px;
-    border-bottom: 1px solid #ddd;
     &:after {
       content: "";
       clear: both;
