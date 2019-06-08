@@ -35,8 +35,6 @@ $(document).on('turbolinks:load', function() {
     .done(function(data){
       var html = buildHTML(data);
       $('.messages').append(html);
-      $('.message.content').val('');
-      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
       return false
     })
     .fail(function(data){
