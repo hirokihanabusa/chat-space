@@ -37,13 +37,9 @@ $(document).on('turbolinks:load', function() {
       dataType: 'json'
     })
     .done(function(users) {
-      // console.log('ok');
-      // console.log(users);
-      // console.log(users.length);
       $("#user-search-result").empty();
       if (users.length !== 0) {
         users.forEach(function(user){
-          // console.log(user);
           appendUser(user);
         });
       }
