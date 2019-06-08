@@ -20,8 +20,6 @@ $(document).on('turbolinks:load', function() {
   }
 
   function appendSentUser(name, user_id) {
-    // console.log(name);
-    // console.log(user_id);
     var html = `<div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
                   <input name='group[user_ids][]' type='hidden' value=${user_id}>
                   <p class="chat-group-user__name">${name}</p>
