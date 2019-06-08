@@ -53,11 +53,7 @@ $(document).on('turbolinks:load', function() {
   });
   
   $(document).on('click', '.user-search-add', function() {
-    // console.log('ok');
-    // test1 = $('.user-search-add').attr("data-user-name");
-    // console.log(test1);
     var name = $(this).attr("data-user-name");
-    // console.log(name);
     var user_id = $(this).attr("data-user-id");
     $(this).parent().remove();
     appendSentUser(name, user_id);
