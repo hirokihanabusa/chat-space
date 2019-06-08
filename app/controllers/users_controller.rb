@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
-
   def index
-    # binding.pry
     @users = User.where('name LIKE(?)', "%#{params[:keyword]}%").where.not(id:current_user)
-    # binding.pry
     respond_to do |format|
       format.html
       format.json
