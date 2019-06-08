@@ -20,8 +20,6 @@ $(document).on('turbolinks:load', function() {
   }
 
   function appendSentUser(name, user_id) {
-    // console.log(name);
-    // console.log(user_id);
     var html = `<div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
                   <input name='group[user_ids][]' type='hidden' value=${user_id}>
                   <p class="chat-group-user__name">${name}</p>
@@ -31,9 +29,7 @@ $(document).on('turbolinks:load', function() {
   }
 
   $("#user-search-field").on("keyup", function(e) {
-    // console.log('ok');
     var input = $("#user-search-field").val();
-    // console.log(input);
     $.ajax({
       type: 'GET',
       url: '/users',
@@ -41,13 +37,9 @@ $(document).on('turbolinks:load', function() {
       dataType: 'json'
     })
     .done(function(users) {
-      // console.log('ok');
-      // console.log(users);
-      // console.log(users.length);
       $("#user-search-result").empty();
       if (users.length !== 0) {
         users.forEach(function(user){
-          // console.log(user);
           appendUser(user);
         });
       }
@@ -61,11 +53,7 @@ $(document).on('turbolinks:load', function() {
   });
   
   $(document).on('click', '.user-search-add', function() {
-    // console.log('ok');
-    // test1 = $('.user-search-add').attr("data-user-name");
-    // console.log(test1);
     var name = $(this).attr("data-user-name");
-    // console.log(name);
     var user_id = $(this).attr("data-user-id");
     $(this).parent().remove();
     appendSentUser(name, user_id);

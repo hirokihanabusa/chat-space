@@ -37,7 +37,6 @@ $(document).on('turbolinks:load', function() {
       var html = buildHTML(data);
       $('.messages').append(html);
       $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
-      $('.form__message').val('');
       $('.new_message')[0].reset();
       $('.form__submit').prop('disabled', false);
       return false
@@ -47,33 +46,24 @@ $(document).on('turbolinks:load', function() {
     })
   });
 
-  // console.log($('.message:last').data('message-id'));
-
   // 自動更新実装
   $(function() {
     var reloadMessages = function() {
-      // console.log("ok")
       if (location.href.match(/\/groups\/\d+\/messages/)){
       //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
         var last_message_id = $('.message:last').attr('data-message-id'); //一番最後にある'messages'というクラスの'id'というデータ属性を取得し、'message_id'という変数に代入
         var group_id = $('.chat').attr('data-group-id')
-        // console.log(group_id);
-        // console.log(last_message_id);
         $.ajax({ 
         url: '/groups/'+ group_id +'/api/messages',
         type: 'GET',
         dataType: 'json',
         data: {id: last_message_id }
       }) 
-      // console.log("ok")
       .done(function(messages) {
-        console.log(messages)
         var insertHTML = '';
-        // inserthtml = buildHTML(messages);
         if (messages.length !== 0) {
           messages.forEach(function(message) {
             insertHTML += buildHTML(message)  
-            // console.log(message)
             $('.messages').append(insertHTML);
             $('.messages').animate({scrollTop:$('.messages')[0].scrollHeight});
           })
