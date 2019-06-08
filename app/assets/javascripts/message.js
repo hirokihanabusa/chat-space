@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
     if (image) {
       var imageHtml=`<img src='${image}' class='lower-message__image'/>`
     } else{
-      var imageHtml=''
+      var imageHtml = ''
     }
 
     var html = `<div class="message" data-message-id="${message.id}">
@@ -20,6 +20,7 @@ $(document).on('turbolinks:load', function() {
   return html;
   }
 
+  // 非同期通信実装
   $('#new_message').on('submit', function(e) { 
     e.preventDefault();
     var formData = new FormData(this);
@@ -40,8 +41,44 @@ $(document).on('turbolinks:load', function() {
       $('.form__submit').prop('disabled', false);
       return false
     })
-    .fail(function(data){
+    .fail(function(){
       alert('エラーが発生したためメッセージは送信できませんでした。');
     })
-  })
+  });
+
+  // 自動更新実装
+  $(function() {
+    var reloadMessages = function() {
+      if (location.href.match(/\/groups\/\d+\/messages/)){
+      //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+        var last_message_id = $('.message:last').attr('data-message-id'); //一番最後にある'messages'というクラスの'id'というデータ属性を取得し、'message_id'という変数に代入
+        var group_id = $('.chat').attr('data-group-id')
+        $.ajax({ 
+        url: '/groups/'+ group_id +'/api/messages',
+        type: 'GET',
+        dataType: 'json',
+        data: {id: last_message_id }
+      }) 
+      .done(function(messages) {
+        var insertHTML = '';
+        if (messages.length !== 0) {
+          messages.forEach(function(message) {
+            insertHTML += buildHTML(message)  
+            $('.messages').append(insertHTML);
+            $('.messages').animate({scrollTop:$('.messages')[0].scrollHeight});
+          })
+        }
+      })
+      .fail(function() {
+        alert('自動更新に失敗しました');
+      })
+      } else {
+        clearInterval(reloadMessages);
+      }
+    };
+    $(function() {
+      setInterval(reloadMessages, 5000);
+      //5000ミリ秒ごとにreloadMessagesという関数を実行する
+    });
+  });
 })
