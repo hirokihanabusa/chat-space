@@ -31,9 +31,7 @@ $(document).on('turbolinks:load', function() {
   }
 
   $("#user-search-field").on("keyup", function(e) {
-    // console.log('ok');
     var input = $("#user-search-field").val();
-    // console.log(input);
     $.ajax({
       type: 'GET',
       url: '/users',
