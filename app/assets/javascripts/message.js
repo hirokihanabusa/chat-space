@@ -35,6 +35,10 @@ $(document).on('turbolinks:load', function() {
     .done(function(data){
       var html = buildHTML(data);
       $('.messages').append(html);
+      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
+      $('.form__message').val('');
+      $('.new_message')[0].reset();
+      $('.form__submit').prop('disabled', false);
       return false
     })
     .fail(function(data){
