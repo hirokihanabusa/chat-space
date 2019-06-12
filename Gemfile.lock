@@ -304,5 +304,8 @@ DEPENDENCIES
   unicorn (= 5.4.1)
   web-console (>= 3.3.0)
 
+RUBY VERSION
+   ruby 2.3.1p112
+
 BUNDLED WITH
    2.0.1
